@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 
+
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var errorLabel: UILabel!
@@ -41,6 +42,10 @@ class LoginViewController: UIViewController {
             return
         }
         
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+          guard let strongSelf = self else { return }
+          // ...
+        }
         
     }
     
