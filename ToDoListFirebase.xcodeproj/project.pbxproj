@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		E99C84B525E6F5B40026DAB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E99C84B325E6F5B40026DAB4 /* LaunchScreen.storyboard */; };
 		E99C84C025E71CE30026DAB4 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C84BF25E71CE30026DAB4 /* TasksViewController.swift */; };
 		E99C84CC25E733100026DAB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99C84CB25E733100026DAB4 /* GoogleService-Info.plist */; };
+		E9C07E4B25EAD4E2003BC1F2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C07E4A25EAD4E2003BC1F2 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		E99C84B625E6F5B40026DAB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E99C84BF25E71CE30026DAB4 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		E99C84CB25E733100026DAB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E9C07E4A25EAD4E2003BC1F2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F6D1E14FD662A894B3A51496 /* Pods_ToDoListFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoListFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -60,7 +62,6 @@
 				3FBB8BDEB65587E3E89BD946 /* Pods-ToDoListFirebase.debug.xcconfig */,
 				8E5AAA301614495A266711D7 /* Pods-ToDoListFirebase.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -109,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				E99C84AC25E6F5B00026DAB4 /* LoginViewController.swift */,
+				E9C07E4A25EAD4E2003BC1F2 /* RegisterViewController.swift */,
 				E99C84BF25E71CE30026DAB4 /* TasksViewController.swift */,
 			);
 			path = Controllers;
@@ -230,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E99C84AD25E6F5B00026DAB4 /* LoginViewController.swift in Sources */,
+				E9C07E4B25EAD4E2003BC1F2 /* RegisterViewController.swift in Sources */,
 				E99C84C025E71CE30026DAB4 /* TasksViewController.swift in Sources */,
 				E99C84A925E6F5B00026DAB4 /* AppDelegate.swift in Sources */,
 				E99C84AB25E6F5B00026DAB4 /* SceneDelegate.swift in Sources */,
