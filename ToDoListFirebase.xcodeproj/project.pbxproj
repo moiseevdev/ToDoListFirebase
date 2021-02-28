@@ -86,6 +86,7 @@
 		E99C84A725E6F5B00026DAB4 /* ToDoListFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				E99C84CB25E733100026DAB4 /* GoogleService-Info.plist */,
 				E99C84C425E71D700026DAB4 /* Controllers */,
 				E99C84C225E71D390026DAB4 /* Supporting files */,
 			);
@@ -101,7 +102,6 @@
 				E99C84B125E6F5B40026DAB4 /* Assets.xcassets */,
 				E99C84B325E6F5B40026DAB4 /* LaunchScreen.storyboard */,
 				E99C84B625E6F5B40026DAB4 /* Info.plist */,
-				E99C84CB25E733100026DAB4 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";

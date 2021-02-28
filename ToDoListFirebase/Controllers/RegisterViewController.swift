@@ -40,15 +40,30 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func registerPressed(_ sender: UIButton) {
-        if chekValid() != nil {
+       
+        let error = chekValid()
+        
+        if error != nil {
             errorLabel.alpha = 1
-            errorLabel.text = chekValid()
+            errorLabel.text = error
         } else {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
-                if error == nil {
-                    self.errorLabel.text = "\(error?.localizedDescription)"
+                if error != nil {
+                   self.errorLabel.text = "\(error?.localizedDescription)"
                 } else {
+                    let db = Firestore.firestore()
+                    db.collection("users").addDocument(data: [
+                        "fistname": self.firstNameTextField.text!,
+                        "lastname": self.lastNameTextField.text!,
+                        "uid": result!.user.uid
+                    ]) { (error) in
+                        if error != nil{
+                            self.errorLabel.text = "Error saving user"
+                        }
+                    }
                     
+                    
+                    print("Jump to next screen")
                 }
             }
         }
