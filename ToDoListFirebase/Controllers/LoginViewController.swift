@@ -21,40 +21,17 @@ class LoginViewController: UIViewController {
         errorLabel.alpha = 0
     }
     
-//    func displayWarningLabel(withText text: String) {
-//        errorLabel.text = text
-//
-//        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { [weak self] in
-//            self?.errorLabel.alpha = 1
-//        }) { [weak self] complete in
-//            self?.errorLabel.alpha = 0
-//        }
-//
-//    }
 
     @IBAction func loginTapped(_ sender: UIButton) {
         
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
             if error != nil {
-                print("net takogo pol'zovatelya")
+                print("Invalid password / No such user exists")
             } else {
-                print("next view!")
+                self.performSegue(withIdentifier: "detailSegue", sender: nil)
             }
         }
         
-//        guard let email = emailTextField.text,
-//              let password = passwordTextField.text,
-//              email != "",
-//              password != ""
-//        else {
-//            displayWarningLabel(withText: "Error")
-//            return
-//        }
-//
-//       Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-//       guard let strongSelf = self else { return }
-//      // ...
-//        }
         
     }
     

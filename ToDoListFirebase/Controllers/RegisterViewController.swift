@@ -21,53 +21,72 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         
         errorLabel.alpha = 0
-
-        // Do any additional setup after loading the view.
+        
     }
     
-    func chekValid() -> String? {
-        if firstNameTextField.text == "" ||
-           lastNameTextField.text == "" ||
-           emailTextField.text == "" ||
-           passwordTextField.text == "" ||
-           firstNameTextField.text == nil ||
-           lastNameTextField.text == nil ||
-           emailTextField.text == nil ||
-           passwordTextField.text == nil {
-            return "Please fill in all fiels"
+    enum AuthResult {
+        case success
+        case failure(Error)
+    }
+    
+    func register(email: String?, password: String?, complection: @escaping (AuthResult) -> Void) {
+        
+        guard Validators.isFilled(firstname: firstNameTextField.text,
+                                  lastname: lastNameTextField.text,
+                                  email: email,
+                                  password: password) else {
+            complection(.failure(AuthError.notFilled))
+            return
         }
-        return nil
+        
+        guard let email = email, let password = password else {
+            complection(.failure(AuthError.unknownError))
+            return
+        }
+
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            guard let _ = result else {
+                complection(.failure(error!))
+                return
+            }
+            
+            let db = Firestore.firestore()
+            db.collection("users").addDocument(data: [
+                "fistname": self.firstNameTextField.text!,
+                "lastname": self.lastNameTextField.text!,
+                "uid": result!.user.uid
+            ]) { (error) in
+                if error != nil{
+                    complection(.failure(AuthError.serverError))
+                }
+                complection(.success)
+            }
+        }
     }
 
     @IBAction func registerPressed(_ sender: UIButton) {
-       
-        let error = chekValid()
         
-        if error != nil {
-            errorLabel.alpha = 1
-            errorLabel.text = error
-        } else {
-            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
-                if error != nil {
-                   self.errorLabel.text = "\(error?.localizedDescription)"
-                } else {
-                    let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: [
-                        "fistname": self.firstNameTextField.text!,
-                        "lastname": self.lastNameTextField.text!,
-                        "uid": result!.user.uid
-                    ]) { (error) in
-                        if error != nil{
-                            self.errorLabel.text = "Error saving user"
-                        }
-                    }
-                    
-                    
-                    print("Jump to next screen")
-                }
+        register(email: emailTextField.text, password: passwordTextField.text) { (result) in
+            switch result {
+            case .success:
+                self.showAlert(with: "Success", and: "Are you registered")
+            case .failure(let error):
+                self.showAlert(with: "Error", and: error.localizedDescription)
             }
         }
         
     }
     
+}
+
+
+extension UIViewController {
+    
+    func showAlert(with title: String, and message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
